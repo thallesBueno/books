@@ -1,5 +1,7 @@
 import express from 'express';
 
+import Logger from './config/logger';
+
 const app = express();
 
 app.get('/', (req, res) => {
@@ -9,5 +11,5 @@ app.get('/', (req, res) => {
 const defaultPort = 3000;
 
 app.listen(defaultPort, () => {
-  console.log(`App listening at port ${defaultPort}.`);
+  Logger.info(`App listening at port ${defaultPort}.`);
 });
