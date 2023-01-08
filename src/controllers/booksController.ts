@@ -53,7 +53,7 @@ const updateBook = async (req: Request, res: Response) => {
   }
 };
 
-const BookController = {
+const bookController = {
   getAllBooks,
   getBook,
   newBook,
@@ -61,4 +61,4 @@ const BookController = {
   updateBook,
 };
 
-export default BookController;
+export default bookController;
