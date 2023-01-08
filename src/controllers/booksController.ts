@@ -14,7 +14,7 @@ const getBook = async (req: Request, res: Response) => {
   if (book) {
     res.status(200).send(book);
   } else {
-    res.status(404).send(book);
+    res.status(404).send("Book doesn't exist");
   }
 };
 
@@ -26,7 +26,7 @@ const deleteBook = async (req: Request, res: Response) => {
   if (book) {
     res.status(200).send(book);
   } else {
-    res.status(404).send(book);
+    res.status(404).send("Book doesn't exist");
   }
 };
 
@@ -49,7 +49,7 @@ const updateBook = async (req: Request, res: Response) => {
   if (book) {
     res.status(200).send(book);
   } else {
-    res.status(404).send();
+    res.status(404).send("Book doesn't exist");
   }
 };
 
