@@ -7,9 +7,14 @@ const findUserByUsername = async (
   username: string,
 ) : Promise<User | null> => userModel.findOne({ username });
 
+const findUserById = async (
+  userId: string,
+) : Promise<User | null> => userModel.findById(userId);
+
 const usersRepository = {
   createUser,
   findUserByUsername,
+  findUserById,
 };
 
 export default usersRepository;

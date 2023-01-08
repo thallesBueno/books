@@ -11,8 +11,12 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
         const payload = (await jwt.verify(token, 'SECRET')) as User;
         if (payload) {
           const user = await usersServices.getUserByUsername(payload.username);
-          req.user = user;
-          next();
+          if (user) {
+            req.user = user;
+            next();
+          } else {
+            res.status(400).json({ error: 'User is not valid.' });
+          }
         } else {
           res.status(400).json({ error: 'Token is not valid.' });
         }

@@ -21,12 +21,15 @@ const getBook = async (req: Request, res: Response) => {
 const deleteBook = async (req: Request, res: Response) => {
   const { bookId } = req.params;
 
-  const book = await bookService.deleteBook(bookId);
-
-  if (book) {
+  try {
+    const book = await bookService.deleteBook(bookId);
     res.status(200).send(book);
-  } else {
-    res.status(404).send("Book doesn't exist");
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).send({ message: error.message });
+    } else {
+      res.status(400).send('Unknow error.');
+    }
   }
 };
 
@@ -41,15 +44,18 @@ const updateBook = async (req: Request, res: Response) => {
   const { bookId } = req.params;
   const { title, author, description } = req.body;
 
-  const book = await bookService.updateBook(
-    bookId,
-    { title, author, description },
-  );
-
-  if (book) {
+  try {
+    const book = await bookService.updateBook(
+      bookId,
+      { title, author, description },
+    );
     res.status(200).send(book);
-  } else {
-    res.status(404).send("Book doesn't exist");
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).send({ message: error.message });
+    } else {
+      res.status(400).send('Unknow error.');
+    }
   }
 };
 
@@ -57,12 +63,15 @@ const rentBook = async (req: Request, res: Response) => {
   const { bookId } = req.params;
   const userId = req.user;
 
-  const book = await bookService.rentBook(bookId, userId.id);
-
-  if (book) {
+  try {
+    const book = await bookService.rentBook(bookId, userId.id);
     res.status(200).send(book);
-  } else {
-    res.status(404).send("Book doesn't exist");
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).send({ message: error.message });
+    } else {
+      res.status(400).send('Unknow error.');
+    }
   }
 };
 
