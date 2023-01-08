@@ -1,6 +1,13 @@
 import './config/env';
-import StartApp from './app';
+import startApp from './app';
+import startDatabase from './config/database';
 
-const port = Number(process.env.PORT || 3000);
+const start = async () => {
+  const port = Number(process.env.PORT || 3000);
+  const databaseUri = process.env.DATABASE_URI || '';
 
-StartApp(port);
+  await startDatabase(databaseUri);
+  startApp(port);
+};
+
+start();
