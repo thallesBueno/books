@@ -57,6 +57,22 @@ const rentBook = async (
   throw new Error('Book does not exists.');
 };
 
+const returnRentedBook = async (
+  bookId: string,
+) : Promise<Book | null> => {
+  const book = await booksRepository.getBook(bookId);
+
+  if (!book) {
+    throw new Error('Book does not exists.');
+  }
+
+  if (!book.rentedBy) {
+    throw new Error('Book is not rented.');
+  }
+
+  return booksRepository.returnRentedBook(bookId);
+};
+
 const BookService = {
   getAllBooks,
   getBook,
@@ -64,6 +80,7 @@ const BookService = {
   deleteBook,
   updateBook,
   rentBook,
+  returnRentedBook,
 };
 
 export default BookService;

@@ -12,6 +12,7 @@ router.delete('/book/:bookId', authMiddleware, bookController.deleteBook);
 router.put('/book/:bookId', authMiddleware, bookController.updateBook);
 
 router.post('/rent/book/:bookId', authMiddleware, bookController.rentBook);
+router.post('/rent/return/book/:bookId', authMiddleware, bookController.returnRentedBook);
 
 router.post('/user/signup', userController.signup);
 router.post('/user/login', userController.login);

@@ -4,7 +4,10 @@ import BookModel from './models/bookModel';
 
 const getAllBooks = async () : Promise<Book[]> => BookModel.find();
 
-const getBook = async (bookId: string) : Promise<Book | null> => BookModel.findById(bookId);
+const getBook = async (bookId: string) : Promise<Book | null> => {
+  const book = await BookModel.findById(bookId);
+  return book as Book;
+};
 
 const deleteBook = async (
   bookId: string,
@@ -17,12 +20,16 @@ const newBook = async (
 const updateBook = async (
   bookId: string,
   updateBookRequest: UpdateBookRequest,
-) : Promise<Book | null> => BookModel.findByIdAndUpdate(bookId, updateBookRequest, { returnDocument: 'after' });
+) : Promise<Book | null> => BookModel.findByIdAndUpdate<Book>(bookId, updateBookRequest, { returnDocument: 'after' });
 
 const rentBook = async (
   bookId: string,
   userId: string,
-) : Promise<Book | null> => BookModel.findByIdAndUpdate(bookId, { rentedBy: userId }, { returnDocument: 'after' });
+) : Promise<Book | null> => BookModel.findByIdAndUpdate<Book>(bookId, { rentedBy: userId }, { returnDocument: 'after' });
+
+const returnRentedBook = async (
+  bookId: string,
+) : Promise<Book | null> => BookModel.findByIdAndUpdate<Book>(bookId, { rentedBy: null }, { returnDocument: 'after' });
 
 const booksRepository = {
   getAllBooks,
@@ -31,6 +38,7 @@ const booksRepository = {
   deleteBook,
   updateBook,
   rentBook,
+  returnRentedBook,
 };
 
 export default booksRepository;

@@ -75,6 +75,21 @@ const rentBook = async (req: Request, res: Response) => {
   }
 };
 
+const returnRentedBook = async (req: Request, res: Response) => {
+  const { bookId } = req.params;
+
+  try {
+    const book = await bookService.returnRentedBook(bookId);
+    res.status(200).send(book);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).send({ message: error.message });
+    } else {
+      res.status(400).send('Unknow error.');
+    }
+  }
+};
+
 const bookController = {
   getAllBooks,
   getBook,
@@ -82,6 +97,7 @@ const bookController = {
   deleteBook,
   updateBook,
   rentBook,
+  returnRentedBook,
 };
 
 export default bookController;
