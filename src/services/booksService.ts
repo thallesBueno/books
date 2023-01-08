@@ -1,5 +1,5 @@
 import Book from '../entities/books';
-import { NewBookRequest } from '../entities/requests';
+import { NewBookRequest, UpdateBookRequest } from '../entities/requests';
 import booksRepository from '../repositories/booksRepository';
 
 const getAllBooks = async () : Promise<Book[]> => booksRepository.getAllBooks();
@@ -12,11 +12,17 @@ const newBook = async (
   newBookRequest: NewBookRequest,
 ) : Promise<Book> => booksRepository.newBook(newBookRequest);
 
+const updateBook = async (
+  bookId: string,
+  updateBookRequest: UpdateBookRequest,
+) : Promise<Book | null> => booksRepository.updateBook(bookId, updateBookRequest);
+
 const BookService = {
   getAllBooks,
   getBook,
   newBook,
   deleteBook,
+  updateBook,
 };
 
 export default BookService;

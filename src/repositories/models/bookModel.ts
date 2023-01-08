@@ -2,9 +2,9 @@ import mongoose, { Schema } from 'mongoose';
 import Book from '../../entities/books';
 
 const bookSchema = new Schema<Book>({
-  title: { type: String, index: true },
-  author: { type: String },
-  description: { type: String },
+  title: { type: String, index: true, required: true },
+  author: { type: String, required: true },
+  description: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 

@@ -37,11 +37,28 @@ const newBook = async (req: Request, res: Response) => {
   res.status(201).send(book);
 };
 
+const updateBook = async (req: Request, res: Response) => {
+  const { bookId } = req.params;
+  const { title, author, description } = req.body;
+
+  const book = await bookService.updateBook(
+    bookId,
+    { title, author, description },
+  );
+
+  if (book) {
+    res.status(200).send(book);
+  } else {
+    res.status(404).send();
+  }
+};
+
 const BookController = {
   getAllBooks,
   getBook,
   newBook,
   deleteBook,
+  updateBook,
 };
 
 export default BookController;
