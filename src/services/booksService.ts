@@ -1,14 +1,19 @@
 import Book from '../entities/books';
+import { NewBookRequest } from '../entities/requests';
+import booksRepository from '../repositories/booksRepository';
 
-const defaultBook : Book = { title: 'Luizito, El Pistoleio.', author: 'Farid Germano', description: 'A biografia oficial do pistoleio.' };
+const getAllBooks = async () : Promise<Book[]> => booksRepository.getAllBooks();
 
-const getAllBooks = () : Book[] => [defaultBook];
+const getBook = (bookId: string) : Promise<Book | null> => booksRepository.getBook(bookId);
 
-const getBook = () : Book | undefined => defaultBook;
+const newBook = async (
+  newBookRequest: NewBookRequest,
+) : Promise<Book> => booksRepository.newBook(newBookRequest);
 
 const BookService = {
   getAllBooks,
   getBook,
+  newBook,
 };
 
 export default BookService;
