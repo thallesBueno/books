@@ -53,12 +53,26 @@ const updateBook = async (req: Request, res: Response) => {
   }
 };
 
+const rentBook = async (req: Request, res: Response) => {
+  const { bookId } = req.params;
+  const userId = req.user;
+
+  const book = await bookService.rentBook(bookId, userId.id);
+
+  if (book) {
+    res.status(200).send(book);
+  } else {
+    res.status(404).send("Book doesn't exist");
+  }
+};
+
 const bookController = {
   getAllBooks,
   getBook,
   newBook,
   deleteBook,
   updateBook,
+  rentBook,
 };
 
 export default bookController;

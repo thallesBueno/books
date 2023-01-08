@@ -19,12 +19,18 @@ const updateBook = async (
   updateBookRequest: UpdateBookRequest,
 ) : Promise<Book | null> => BookModel.findByIdAndUpdate(bookId, updateBookRequest, { returnDocument: 'after' });
 
+const rentBook = async (
+  bookId: string,
+  userId: string,
+) : Promise<Book | null> => BookModel.findByIdAndUpdate(bookId, { rentedBy: userId }, { returnDocument: 'after' });
+
 const booksRepository = {
   getAllBooks,
   getBook,
   newBook,
   deleteBook,
   updateBook,
+  rentBook,
 };
 
 export default booksRepository;

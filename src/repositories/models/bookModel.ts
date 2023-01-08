@@ -5,6 +5,7 @@ const bookSchema = new Schema<Book>({
   title: { type: String, index: true, required: true },
   author: { type: String, required: true },
   description: { type: String, required: true },
+  rentedBy: { type: Schema.Types.ObjectId, default: null },
   createdAt: { type: Date, default: Date.now },
 });
 

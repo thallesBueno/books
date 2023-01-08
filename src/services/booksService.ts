@@ -17,12 +17,18 @@ const updateBook = async (
   updateBookRequest: UpdateBookRequest,
 ) : Promise<Book | null> => booksRepository.updateBook(bookId, updateBookRequest);
 
+const rentBook = async (
+  bookId: string,
+  userId: string,
+) : Promise<Book | null> => booksRepository.rentBook(bookId, userId);
+
 const BookService = {
   getAllBooks,
   getBook,
   newBook,
   deleteBook,
   updateBook,
+  rentBook,
 };
 
 export default BookService;

@@ -13,8 +13,12 @@ const signup = async (userRequest: User) : Promise<User> => {
   return user;
 };
 
+const getUserByUsername = async (
+  username: string,
+) : Promise<User | null> => usersRepository.findUserByUsername(username);
+
 const login = async (userRequest: User) : Promise<string> => {
-  const user = await usersRepository.findUserByUsername(userRequest.username);
+  const user = await getUserByUsername(userRequest.username);
 
   if (user) {
     const isPasswordRight = await bcrypt.compare(userRequest.password, user.password);
@@ -32,6 +36,7 @@ const login = async (userRequest: User) : Promise<string> => {
 const BookService = {
   signup,
   login,
+  getUserByUsername,
 };
 
 export default BookService;
