@@ -1,7 +1,8 @@
 interface Book {
   title: string
   author: string
-  description: string
+  description: string,
+  createdAt: Date
 }
 
 export default Book;
