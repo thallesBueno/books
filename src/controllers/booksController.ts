@@ -90,6 +90,14 @@ const returnRentedBook = async (req: Request, res: Response) => {
   }
 };
 
+const searchBooks = async (req: Request, res: Response) => {
+  const { searchTerm } = req.body;
+
+  const books = await bookService.searchBooks(searchTerm);
+
+  res.status(200).send(books);
+};
+
 const bookController = {
   getAllBooks,
   getBook,
@@ -98,6 +106,7 @@ const bookController = {
   updateBook,
   rentBook,
   returnRentedBook,
+  searchBooks,
 };
 
 export default bookController;

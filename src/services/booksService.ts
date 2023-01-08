@@ -73,6 +73,10 @@ const returnRentedBook = async (
   return booksRepository.returnRentedBook(bookId);
 };
 
+const searchBooks = async (
+  searchTerm: string,
+) : Promise<Book[]> => booksRepository.searchBooks(searchTerm);
+
 const BookService = {
   getAllBooks,
   getBook,
@@ -81,6 +85,7 @@ const BookService = {
   updateBook,
   rentBook,
   returnRentedBook,
+  searchBooks,
 };
 
 export default BookService;

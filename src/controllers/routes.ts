@@ -5,8 +5,9 @@ import userController from './usersController';
 
 const router = express.Router();
 
-router.get('/books', authMiddleware, bookController.getAllBooks);
 router.get('/book/:bookId', authMiddleware, bookController.getBook);
+router.get('/books', authMiddleware, bookController.getAllBooks);
+router.post('/books/search', authMiddleware, bookController.searchBooks);
 router.post('/book', authMiddleware, bookController.newBook);
 router.delete('/book/:bookId', authMiddleware, bookController.deleteBook);
 router.put('/book/:bookId', authMiddleware, bookController.updateBook);
